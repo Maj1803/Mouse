@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Important Notice</title>
+
+<style>
+body {
+    margin: 0;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    overflow: hidden;
+}
+
+#intro {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2em;
+}
+
+#mainContent {
+    display: none;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+h1 {
+    font-size: 2.5em;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.flash {
+    animation: flashEffect 0.3s;
+}
+
+@keyframes flashEffect {
+    0% { background: white; }
+    100% { background: black; }
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: -10px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+    <p>⚠️ Initializing sequence...</p>
+    <p>Please wait...</p>
+</div>
+
+<div id="mainContent">
+    <h1>🐭 YOU'VE BEEN VISITED BY THE DANCING MOUSE! 🐭</h1>
+    <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" width="250">
+    <p>This is just a joke 😄</p>
+    <button onclick="alert('Okay okay… you got pranked 😂')">Okay you got me!</button>
+</div>
+
+<script>
+// Simple dramatic beep using Web Audio API
+function playBeep() {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioCtx.createOscillator();
+    oscillator.type = "sawtooth";
+    oscillator.frequency.setValueAtTime(200, audioCtx.currentTime);
+    oscillator.connect(audioCtx.destination);
+    oscillator.start();
+    oscillator.stop(audioCtx.currentTime + 0.5);
+}
+
+// After 3 seconds, reveal prank
+setTimeout(() => {
+    document.body.classList.add("flash");
+    playBeep();
+
+    setTimeout(() => {
+        document.getElementById("intro").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+
+        // Confetti
+        for (let i = 0; i < 80; i++) {
+            let confetti = document.createElement("div");
+            confetti.classList.add("confetti");
+            confetti.style.left = Math.random() * 100 + "vw";
+            confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            confetti.style.backgroundColor = 
+                `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.body.appendChild(confetti);
+        }
+    }, 300);
+
+}, 3000);
+</script>
+
+</body>
+</html>
