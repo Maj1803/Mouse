@@ -14,21 +14,26 @@ body {
     text-align: center;
     overflow: hidden;
 }
-
+    
 #intro {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-size: 2em;
 }
 
 #mainContent {
     display: none;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
 
 h1 {
     font-size: 2.5em;
